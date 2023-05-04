@@ -1,7 +1,7 @@
 all: send recv
 
 send: base64_utils encode decode base64_utils.h cencode.h cdecode.h
-	gcc send.c base64_utils.o cencode.o cdecode.o base64_utils.h cencode.h cdecode.h -o send
+	gcc send.c base64_utils.o cencode.o cdecode.o -o send
 recv: recv.c
 	gcc recv.c -o recv
 base64_utils: base64_utils.c
