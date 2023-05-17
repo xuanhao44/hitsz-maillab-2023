@@ -1,37 +1,52 @@
 # maillab
 
-#### 介绍
-邮件客户端实验代码框架
+实现一个简单的邮件客户端，完成邮件发送与接收功能：
 
-#### 软件架构
-软件架构说明
+- 使用 STMP 协议与邮件服务器交互，将邮件发送给任意收件人。
+- 使用 POP3 协议与服务器交互，查询收件箱中的邮件信息。
 
+## Send your emails
 
-#### 安装教程
+1. 在 `send.c` 文件中更改 `host_name`、`user`、`pass`、`from` 为邮件服务器名称（如 `smtp.qq.com`）、你的邮箱（如 `username@qq.com`）、你的授权码（请自行在邮箱设置中获取）和发件人邮箱。
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+2. 编译程序：
 
-#### 使用说明
+   ```shell
+   make
+   ```
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+3. 在终端中执行以下命令：
 
-#### 参与贡献
+   ```shell
+   ./send RECIPIENT [-s SUBJECT] [-m MESSAGE] [-a ATTACHMENT]
+   ```
 
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+   其中各参数为：
 
+   - `RECIPIENT`：收件人邮箱
 
-#### 特技
+   - `SUBJECT`：邮件主题
 
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+   - `MESSAGE`：邮件正文 或 含有邮件正文的文件路径
+
+     程序会首先检查 `MESSAGE` 是否是文件路径，如果是则读取文件内容作为正文，否则直接将其作为正文
+
+   - `ATTACHMENT`：邮件附件，只支持一个附件
+
+## Receive your emails
+
+邮件收取功能相对固定，将按顺序执行以下操作：查看邮件总数和总大小，列出所有邮件和它们的大小，展示第一封邮件的内容。
+
+1. 在 `recv.c` 文件中更改 `host_name`、`user`、`pass` 为邮件服务器名称（如 `pop.qq.com`）、你的邮箱（如 `username@qq.com`）、你的授权码（请自行在邮箱设置中获取）。
+
+2. 编译程序：
+
+   ```shell
+   make
+   ```
+
+3. 在终端中执行以下命令：
+
+   ```shell
+   ./recv
+   ```
