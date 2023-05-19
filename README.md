@@ -1,5 +1,7 @@
 # maillab
 
+指导书留档：<https://github.com/xuanhao44/comp-network-2023>
+
 实现一个简单的邮件客户端，完成邮件发送与接收功能：
 
 - 使用 STMP 协议与邮件服务器交互，将邮件发送给任意收件人。
