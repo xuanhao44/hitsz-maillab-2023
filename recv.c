@@ -166,13 +166,23 @@ void recv_mail()
 
     // 第一封邮件的内容
     // TODO: Retrieve the first mail and print its content
+    // 例如：比如总大小是 42054，一共接收了四次
+    // total_size = 42054
+    // 1. r_size = 14104
+    // 2. r_size = 5696
+    // 3. r_size = 19936
+    // 4. r_size = 2334
+
     sprintf(buf, "RETR %d\r\n", 1); // first
     cus_send(s_fd, (void *)buf, strlen(buf), 0, "send RETR");
-    r_size = cus_recv(s_fd, (void *)buf, MAX_SIZE, 0, "recv RETR");
+    r_size = cus_recv(s_fd, (void *)buf, MAX_SIZE, 0, "recv RETR 1"); // 先接收了一部分
 
+    // atoi 会从数字开始读，读到非数字停止，取出数字
+    // 所以 atoi 刚好取出 +OK (4 字符) 后的数字 total_size 就停止
     int total_size = atoi(buf + 4);
     total_size -= r_size;
-    while (total_size > 0)
+
+    while (total_size > 0) // 继续读剩下的，直到结束
     {
         r_size = cus_recv(s_fd, (void *)buf, MAX_SIZE, 0, "recv RETR");
         total_size -= r_size;

@@ -198,6 +198,7 @@ void send_mail(const char *receiver, const char *subject, const char *msg, const
     // 4 服务器发送经过 Base64 编码的字符串“Username:”
     // 然后客户端发送经过 Base64 编码的用户名。
     char *user_base64 = encode_str(user);
+    // 关于使用 encode 之后是否需要加上 "\r\n"，每个同学都有差异，有的人说要加，有的人说不要加。很奇怪，所以还是要自己试试行不行。
     strcat(user_base64, "\r\n");
     cus_send(s_fd, (void *)user_base64, strlen(user_base64), 0, "send username");
     cus_recv(s_fd, (void *)buf, MAX_SIZE, 0, "recv AUTH");
